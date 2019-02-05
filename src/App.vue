@@ -2,7 +2,9 @@
   <v-app id="app">
     <SuSideMenu v-model="drawer"/>
     <SuHeader @menu-click="drawer = !drawer"/>
-    <router-view></router-view>
+    <v-content>
+      <router-view></router-view>
+    </v-content>
   </v-app>
 </template>
 
