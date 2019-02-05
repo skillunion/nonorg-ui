@@ -2,16 +2,14 @@ import 'babel-polyfill'
 import Vue from 'vue'
 import './plugins/vuetify'
 import App from './App.vue'
-import router from './router'
-import store from './store'
-import ApiService from "./common/api.service"
+import router from './router/index'
+import store from './store/index'
 
 Vue.config.productionTip = false
 
-ApiService.init()
-
 new Vue({
+  el: '#app',
+  render: h => h(App),
   router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+  store
+})

@@ -10,8 +10,10 @@
 import WorksTable from "@/components/WorksTable";
 
 export default {
+  name: "su-works",
   components: {
     WorksTable
   }
 };
+
 </script>
