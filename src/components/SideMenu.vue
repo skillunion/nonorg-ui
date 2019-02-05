@@ -31,7 +31,7 @@
             </v-list-tile-content>
           </v-list-tile>
         </v-list-group>
-        <v-list-tile v-else :key="item.text" @click="onMenuTap(item.path)" :to="item.path">
+        <v-list-tile v-else :key="item.text" :to="item.path">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
