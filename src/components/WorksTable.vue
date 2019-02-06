@@ -1,5 +1,19 @@
 <template>
   <div>
+    <v-layout>
+      <v-combobox
+        v-model="topicFilter.select"
+        :items="topicFilter.items"
+        label="Select topics to filter works"
+        multiple
+        chips
+        solo
+      ></v-combobox>
+      <v-btn large @click="dialog = !dialog" color="primary" dark class="my-0">
+        <v-icon dark>add</v-icon>Add new work
+      </v-btn>
+    </v-layout>
+
     <v-data-table
       must-sort
       :headers="headers"
@@ -15,12 +29,12 @@
         <td class="text-xs-left">{{ props.item.title }}</td>
       </template>
     </v-data-table>
+
     <v-layout row justify-center>
       <v-dialog v-model="dialog" persistent max-width="400px">
-        <v-btn slot="activator" color="primary" dark>Create new item</v-btn>
         <v-card>
           <v-card-title>
-            <span class="headline">Work</span>
+            <span class="headline">New work</span>
           </v-card-title>
           <v-card-text>
             <v-text-field v-model="itemData.title" label="Title*" required></v-text-field>
@@ -38,7 +52,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -46,7 +59,31 @@ export default {
       dialog: false,
       headers: [{ text: "id", value: "id" }, { text: "title", value: "title" }],
       itemData: {
-        'title': ""
+        title: ""
+      },
+      topicFilter: {
+        select: null,
+        items: [
+          "Sharding",
+          "Plasma",
+          "Casper",
+          "Uncategorized",
+          "Economics",
+          "Applications",
+          "zk-s[nt]arks",
+          "Better ICOs",
+          "State channels",
+          "Security",
+          "EVM/eWASM",
+          "meta-innovation",
+          "Decentralized exchanges",
+          "Multiparty Computation",
+          "Administrivia",
+          "UI/UX",
+          "Miscellaneous",
+          "mining",
+          "Data Science"
+        ]
       }
     };
   },
@@ -76,7 +113,7 @@ export default {
   },
   methods: {
     async onSaveButtonClick() {
-      await this.$store.dispatch("SAVE_ITEM", this.itemData)
+      await this.$store.dispatch("SAVE_ITEM", this.itemData);
       this.itemData.title = "";
       this.dialog = false;
     },

@@ -4,15 +4,15 @@
       <v-toolbar-side-icon @click.stop="$emit('menu-click')"></v-toolbar-side-icon>
       <span class="hidden-sm-and-down">NonOrg</span>
     </v-toolbar-title>
-    <v-text-field
+    <!-- <v-text-field
       flat
       solo-inverted
       hide-details
       prepend-inner-icon="search"
       label="Search"
       class="hidden-sm-and-down"
-    ></v-text-field>
-    <v-spacer></v-spacer>
+    ></v-text-field>-->
+    <!-- <v-spacer></v-spacer>
     <v-btn icon>
       <v-icon>apps</v-icon>
     </v-btn>
@@ -23,7 +23,7 @@
       <v-avatar size="32px" tile>
         <img src="https://cdn.vuetifyjs.com/images/logos/logo.svg" alt="Vuetify">
       </v-avatar>
-    </v-btn>
+    </v-btn>-->
   </v-toolbar>
 </template>
 

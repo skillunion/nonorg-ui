@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer :clipped="$vuetify.breakpoint.lgAndUp" v-bind:value="value" fixed app>
+  <v-navigation-drawer :clipped="$vuetify.breakpoint.lgAndUp"  v-bind:value="value" fixed app>
     <v-list dense>
       <template v-for="item in items">
         <v-layout v-if="item.heading" :key="item.heading" row align-center>
