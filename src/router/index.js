@@ -20,6 +20,11 @@ export default new Router({
       path: '/apollo',
       name: 'apollo',
       component: () => import("@/views/Apollo")
+    },
+    {
+      path: '/topics',
+      name: 'topics',
+      component: () => import("@/views/Topics")
     }
   ]
 })

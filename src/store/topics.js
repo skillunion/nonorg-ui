@@ -4,7 +4,7 @@ const state = {
   pagination: {
     descending: true,
     page: 1,
-    rowsPerPage: 4,
+    rowsPerPage: 16,
     sortBy: 'fat',
     totalItems: 0,
     rowsPerPageItems: [1, 2, 4, 8, 16]
@@ -44,8 +44,8 @@ const mutations = {
 const actions = {
   GET_TOPIC: async (context, payload) => {
     let { data } = await Axios.get('https://my-json-server.typicode.com/skillunion/nonorg-myjsonserver/topics');
-    let items = data;
-    let totalItems = items.length;
+    let totalItems = data.length;
+    let items = data.slice(0, state.pagination.rowsPerPage); // !!!!!
     context.commit('SET_TOPIC', { items, totalItems });
   },
 
