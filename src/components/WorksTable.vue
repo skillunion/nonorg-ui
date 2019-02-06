@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -77,7 +76,7 @@ export default {
   },
   methods: {
     async onSaveButtonClick() {
-      let x = await this.$store.dispatch("SAVE_ITEM", this.itemData)
+      await this.$store.dispatch("SAVE_ITEM", this.itemData)
       this.itemData.title = "";
       this.dialog = false;
     },
