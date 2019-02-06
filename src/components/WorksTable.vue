@@ -1,18 +1,18 @@
 <template>
   <div>
-    <v-layout>
-      <v-combobox
-        v-model="topicFilter.select"
-        :items="topicFilter.items"
-        label="Select topics to filter works"
-        multiple
-        chips
-        solo
-      ></v-combobox>
-      <v-btn large @click="dialog = !dialog" color="primary" dark class="my-0">
-        <v-icon dark>add</v-icon>Add new work
-      </v-btn>
-    </v-layout>
+    <v-btn
+      absolute
+      dark
+      fab
+      bottom
+      right
+      fixed
+      color="pink"
+      @click="dialog = !dialog"
+      style="bottom:20px;"
+    >
+      <v-icon dark>add</v-icon>
+    </v-btn>
 
     <v-data-table
       must-sort
@@ -60,40 +60,15 @@ export default {
       headers: [{ text: "id", value: "id" }, { text: "title", value: "title" }],
       itemData: {
         title: ""
-      },
-      topicFilter: {
-        select: null,
-        items: [
-          "Sharding",
-          "Plasma",
-          "Casper",
-          "Uncategorized",
-          "Economics",
-          "Applications",
-          "zk-s[nt]arks",
-          "Better ICOs",
-          "State channels",
-          "Security",
-          "EVM/eWASM",
-          "meta-innovation",
-          "Decentralized exchanges",
-          "Multiparty Computation",
-          "Administrivia",
-          "UI/UX",
-          "Miscellaneous",
-          "mining",
-          "Data Science"
-        ]
       }
     };
   },
   watch: {
     pagination: {
-      handler() {
-        this.loading = true;
-        this.$store.dispatch("GET_ITEM").then(result => {
-          this.loading = false;
-        });
+      async handler() {
+        this.loading = true
+        await this.$store.dispatch("GET_ITEM")
+        this.loading = false
       },
       deep: true
     }
@@ -101,25 +76,25 @@ export default {
   computed: {
     pagination: {
       get: function() {
-        return this.$store.getters.PAGINATION;
+        return this.$store.getters.PAGINATION
       },
       set: function(value) {
-        this.$store.commit("SET_PAGINATION", value);
+        this.$store.commit("SET_PAGINATION", value)
       }
     },
     items() {
-      return this.$store.getters.ITEMS;
+      return this.$store.getters.ITEMS
     }
   },
   methods: {
     async onSaveButtonClick() {
-      await this.$store.dispatch("SAVE_ITEM", this.itemData);
-      this.itemData.title = "";
-      this.dialog = false;
+      await this.$store.dispatch("SAVE_ITEM", this.itemData)
+      this.itemData.title = ""
+      this.dialog = false
     },
     onCloseButtonClick() {
-      this.itemData.title = "";
-      this.dialog = false;
+      this.itemData.title = ""
+      this.dialog = false
     }
   }
 };
