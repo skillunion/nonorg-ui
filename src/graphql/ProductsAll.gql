@@ -1,0 +1,15 @@
+{
+  products: allProducts(count: 25) {
+    id
+    name
+    price
+  }
+
+  user: User(id: "wk0z1j1tzj7xc0116is3ckdrx") {
+    id
+    firstName
+    lastName
+    email
+    avatar
+  }
+}

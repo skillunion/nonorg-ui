@@ -53,6 +53,7 @@ export default {
     drawer: null,
     items: [
       { icon: "group_work", text: "Works", path: "/works" },
+      { icon: "group_work", text: "Apollo", path: "/apollo" },
       { icon: "insert_chart", text: "My Dashboard", path: "/dashboard" },
       { icon: "settings", text: "Governance", path: "/governance" },
       {
