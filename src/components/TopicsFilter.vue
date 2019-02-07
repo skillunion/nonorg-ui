@@ -1,17 +1,14 @@
-<template>
-  <v-layout>
-    <v-combobox
+<template >
+    <v-combobox 
       v-model="select"
       :items="items"
       item-text="title"
       item-value="id"
-      label="Select topics to filter works"
-      multiple
-      chips
+      label="Select topic"
       solo
-      @input="$emit('filter-changed', select)"
+      @input="onFilterChanged(select)"
+      hide-details
     ></v-combobox>
-  </v-layout>
 </template>
 
 <script>
@@ -28,6 +25,11 @@ export default {
   },
   mounted() {
     this.$store.dispatch("GET_TOPIC");
+  },
+  methods: {
+    onFilterChanged(topics) {
+      //this.$store.dispatch("SET_FILTER_CATEGORY_WORKS", topics.id)
+    }
   }
 };
 </script>

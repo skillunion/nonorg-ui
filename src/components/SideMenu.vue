@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer :clipped="$vuetify.breakpoint.lgAndUp"  v-bind:value="value" fixed app>
+    <TopicsFilter />
     <v-list dense>
       <template v-for="item in items">
         <v-layout v-if="item.heading" :key="item.heading" row align-center>
@@ -45,8 +46,13 @@
 </template>
 
 <script>
+import TopicsFilter from "@/components/TopicsFilter";
+
 export default {
   name: "SuSideMenu",
+  components: {
+    TopicsFilter
+  },
   props: ["value"],
   data: () => ({
     dialog: false,
