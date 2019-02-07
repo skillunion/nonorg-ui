@@ -42,15 +42,15 @@ const mutations = {
 }
 
 const actions = {
-  GET_ITEM: async (context, payload) => {
-    let { data } = await Axios.get('https://my-json-server.typicode.com/skillunion/nonorg-myjsonserver/works');
+  GET_ITEM: async (context) => { // payload - the second param
+    let { data } = await Axios.get('https://my-json-server.typicode.com/skillunion/nonorg-fake-api/works');
     let totalItems = data.length;
     let items = data.slice(0, state.pagination.rowsPerPage); // !!!!!
     context.commit('SET_ITEM', { items, totalItems });
   },
 
   SAVE_ITEM: async (context, payload) => {
-    let { data } = await Axios.post('https://my-json-server.typicode.com/skillunion/nonorg-myjsonserver/works', payload);
+    let { data } = await Axios.post('https://my-json-server.typicode.com/skillunion/nonorg-fake-api/works', payload);
     context.commit('ADD_ITEM', data);
   }
 }
