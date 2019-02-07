@@ -25,6 +25,11 @@ export default new Router({
       path: '/topics',
       name: 'topics',
       component: () => import("@/views/Topics")
+    },
+    {
+      path: '/ethereum',
+      name: 'ethereum',
+      component: () => import("@/views/Ethereum")
     }
   ]
 })

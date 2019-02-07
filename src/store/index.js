@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import works from './works';
 import topics from './topics';
+import eth from './eth';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -11,6 +12,7 @@ export default new Vuex.Store({
   actions: {},
   modules: {
     works,
-    topics
+    topics,
+    eth
   }
 });
