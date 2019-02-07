@@ -1,9 +1,7 @@
 <template>
-  <v-layout pa-3 mb-12>
-    <v-flex>
-      <ApolloTable/>
-    </v-flex>
-  </v-layout>
+  <v-flex>
+    <ApolloTable/>
+  </v-flex>
 </template>
 
 <script>
@@ -15,5 +13,4 @@ export default {
     ApolloTable
   }
 };
-
 </script>

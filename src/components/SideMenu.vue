@@ -1,6 +1,15 @@
 <template>
-  <v-navigation-drawer :clipped="$vuetify.breakpoint.lgAndUp"  v-bind:value="value" fixed app>
-    <TopicsFilter />
+  <v-navigation-drawer
+    :clipped="$vuetify.breakpoint.mdAndUp"
+    mobile-break-point="960"
+    v-bind:value="value"
+    fixed
+    app
+  >
+    <v-toolbar flat>
+      <TopicsFilter/>
+    </v-toolbar>
+    <v-divider></v-divider>
     <v-list dense>
       <template v-for="item in items">
         <v-layout v-if="item.heading" :key="item.heading" row align-center>

@@ -1,9 +1,7 @@
 <template>
-  <v-layout pa-3>
-    <v-flex>
-      <WorksTable/>
-    </v-flex>
-  </v-layout>
+  <v-flex>
+    <WorksTable/>
+  </v-flex>
 </template>
 
 <script>
@@ -15,5 +13,4 @@ export default {
     WorksTable
   }
 };
-
 </script>

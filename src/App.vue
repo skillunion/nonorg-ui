@@ -3,7 +3,9 @@
     <SuSideMenu v-model="drawer"/>
     <SuHeader @menu-click="drawer = !drawer"/>
     <v-content>
-      <router-view></router-view>
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
     </v-content>
   </v-app>
 </template>

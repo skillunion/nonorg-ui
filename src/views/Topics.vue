@@ -1,9 +1,7 @@
 <template>
-  <v-layout pa-3>
-    <v-flex>
-      <TopicsTable/>
-    </v-flex>
-  </v-layout>
+  <v-flex>
+    <TopicsTable/>
+  </v-flex>
 </template>
 
 <script>
@@ -15,5 +13,4 @@ export default {
     TopicsTable
   }
 };
-
 </script>

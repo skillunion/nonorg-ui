@@ -1,6 +1,6 @@
 <template>
-  <v-toolbar :clipped-left="$vuetify.breakpoint.lgAndUp" color="blue darken-3" dark app fixed>
-    <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
+  <v-toolbar :clipped-left="$vuetify.breakpoint.mdAndUp" color="blue darken-3" dark app fixed>
+    <v-toolbar-title style="width: 300px" class="ml-0 pl-0">
       <v-toolbar-side-icon @click.stop="$emit('menu-click')"></v-toolbar-side-icon>
       <span class="hidden-sm-and-down">NonOrg</span>
     </v-toolbar-title>
