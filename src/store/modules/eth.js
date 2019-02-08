@@ -1,4 +1,4 @@
-import getWeb3 from '../util/getWeb3'
+import getWeb3 from '@/util/getWeb3'
 
 const state = {
     web3: {

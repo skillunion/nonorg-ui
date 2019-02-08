@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import works from './works';
-import topics from './topics';
-import eth from './eth';
+import works from './modules/works';
+import topics from './modules/topics';
+import eth from './modules/eth';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
