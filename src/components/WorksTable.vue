@@ -52,6 +52,8 @@
 </template>
 
 <script>
+import {MODULE_ACTIONS, ACTIONS, MODULE_GETTERS, GETTERS} from '@/store/works/consts'
+
 export default {
   data() {
     return {
@@ -67,7 +69,7 @@ export default {
     pagination: {
       async handler() {
         this.loading = true
-        await this.$store.dispatch("GET_ITEM")
+        await this.$store.dispatch(MODULE_ACTIONS[ACTIONS.GET_ITEM])
         this.loading = false
       },
       deep: true
@@ -76,19 +78,19 @@ export default {
   computed: {
     pagination: {
       get: function() {
-        return this.$store.getters.PAGINATION
+        return this.$store.getters[MODULE_GETTERS[GETTERS.PAGINATION]]
       },
       set: function(value) {
-        this.$store.commit("SET_PAGINATION", value)
+        this.$store.commit(MODULE_ACTIONS[ACTIONS.SET_PAGINATION], value)
       }
     },
     items() {
-      return this.$store.getters.ITEMS
+      return this.$store.getters[MODULE_GETTERS[GETTERS.ITEMS]]
     }
   },
   methods: {
     async onSaveButtonClick() {
-      await this.$store.dispatch("SAVE_ITEM", this.itemData)
+      await this.$store.dispatch(MODULE_ACTIONS[ACTIONS.SAVE_ITEM], this.itemData)
       this.itemData.title = ""
       this.dialog = false
     },

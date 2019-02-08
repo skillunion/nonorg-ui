@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import {MODULE_ACTIONS, ACTIONS, MODULE_GETTERS, GETTERS} from '@/store/topics/consts'
+
 export default {
   data() {
     return {
@@ -28,11 +30,11 @@ export default {
   },
   computed: {
     items() {
-      return this.$store.getters.TOPICS;
+      return this.$store.getters[MODULE_GETTERS[GETTERS.TOPICS]];
     }
   },
   mounted() {
-    this.$store.dispatch("GET_TOPIC");
+    this.$store.dispatch(MODULE_ACTIONS[ACTIONS.GET_TOPIC]);
   },
   methods: {
     onFilterChanged() { //topics - input var
