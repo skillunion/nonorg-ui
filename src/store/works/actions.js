@@ -8,10 +8,12 @@ const STORE_ACTIONS = {
         let items = data.slice(0, getters[GETTERS.PAGINATION].rowsPerPage); // !!!!!
         commit(MUTATIONS.SET_ITEM, { items, totalItems });
     },
+
     async [ACTIONS.SAVE_ITEM]({ dispatch, commit }, value) {
         let { data } = await Axios.post('https://my-json-server.typicode.com/skillunion/nonorg-fake-api/works', value);
         commit(MUTATIONS.ADD_ITEM, data);
     },
+
     [ACTIONS.SET_PAGINATION]({ dispatch, commit }, value) {
         commit(MUTATIONS.SET_PAGINATION, value);
     }
