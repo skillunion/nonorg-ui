@@ -2,68 +2,36 @@ import contract from 'truffle-contract'
 import RegistryContract from '@/abi/Registry.json'
 import RegistryFactoryContract from '@/abi/RegistryFactory.json'
 import config from '@/conf/config.json'
-
+const ethers = require('ethers')
 
 const EthContext = {
-    provide : {
-       eth : () => this
-    },
 
     contract: null,
 
     registryFactory: null,
   
-    web3 : null,
-  
-    init: function () {
-      let self = this
-  
-      new Promise(function (resolve, reject) {
-        console.log('1.starting EthContext.init')
-        self.contract = contract(RegistryFactoryContract)
-        self.web3 = window.web3
-        self.contract.setProvider(self.web3.currentProvider)
-        console.log('self.web3.currentProvider',self.web3.currentProvider)
-        console.log('self.contract',self.contract)
-        self.contract.deployed().then(instance => {
-          console.log('RESOLVED#1 instance')
-          self.registryFactory = instance
-          resolve(instance)
-          console.log('RESOLVED EthContext.init')
-        }).catch(err => {
-          console.log('err #3>',err)
-          reject(err)
-          console.log('REJECTED EthContext.init')
-        })
-        console.log('END EthContext.init')
-      }).then(async registryFactory => {
-        let n = await registryFactory.registriesLen.call();
-        console.log('n>',n)
-
-         let r;
-        r = await registryFactory.registries(0)
-          console.log('r0>',r)
-          r = await registryFactory.registries(1)
-            console.log('r1>',r)
-            r = await registryFactory.registries(2)
-            console.log('r2>',r)
-            r = await registryFactory.registries(3)
-            console.log('r3>',r)
-
-    /*    
-        registryFactory.getPastEvents({
-            address: registryFactory.address
-        },function(e, data) {
-            // do something with data.listingId
-            console.log('#5',e,data);
-        })
-      */
-    })
+    init: async function () {
+      let abi_Factory = [
+        "event NewRegistry(address creator, address token, address plcr, address parameterizer, address registry)",
+        "function newRegistryBYOToken(address _token, uint[] _parameters, string _name) public returns (address)",
+        "function newRegistryWithToken(uint _supply, string _tokenName, uint8 _decimals, string _symbol, uint[] _parameters, string _registryName) public returns (address)",
+      ]
+      let abi_Registry = [
+        "function name() public view returns (string)"
+      ]
+      console.log('1.starting EthContext.init')
+      let provider = new ethers.providers.InfuraProvider("rinkeby", "52bd875c563a4d6abff4d396bac8a8a5")
+      provider.resetEventsBlock(3838900)
+      let registryFactory = new ethers.Contract("0xbab4bd488a2c489b04bd867e26293ab88ab87392", abi_Factory, provider);
+      registryFactory.on('NewRegistry', async (creator, token, plcr, parameterizer, registryAddress, event) => {
+        console.log('ethers registry>',registryAddress, event);
+        let registry = new ethers.Contract(registryAddress, abi_Registry, provider);
+        console.log('registry.name>',await registry.name())
+      })
     },
 
     newRegistry: async function () {
         let self = this
-
         const paramConfig = config.paramDefaults
 
         var registryReceipt = await self.registryFactory.newRegistryWithToken(
