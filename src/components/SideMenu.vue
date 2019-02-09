@@ -51,13 +51,31 @@
         </v-list-tile>
       </template>
     </v-list>
+    
+    <v-btn
+      absolute
+      dark
+      fab
+      bottom
+      right
+      fixed
+      color="pink"
+      @click="newRegistry"
+      style="bottom:20px;"
+    >
+      <v-icon dark>add</v-icon>
+    </v-btn>
   </v-navigation-drawer>
+  
 </template>
 
 <script>
 import TopicsFilter from "@/components/TopicsFilter";
+import EthContext from "@/util/eth";
 
 export default {
+//  inject : ['eth'],
+
   name: "SuSideMenu",
   components: {
     TopicsFilter
@@ -85,6 +103,14 @@ export default {
         ]
       }
     ]
-  })
+  }),
+  methods : {
+      async newRegistry(event){
+          console.log(event)
+          await EthContext.newRegistry().then(tx=>{
+              console.log('newRegistry>',tx)
+          })
+      }
+  }
 };
 </script>
