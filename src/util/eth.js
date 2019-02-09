@@ -62,7 +62,10 @@ const EthContext = {
     },
 
     newRegistry: async function () {
+        let self = this
+
         const paramConfig = config.paramDefaults
+
         var registryReceipt = await self.registryFactory.newRegistryWithToken(
             config.token.supply,
             config.token.name,
