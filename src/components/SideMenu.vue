@@ -71,7 +71,7 @@
 
 <script>
 import TopicsFilter from "@/components/TopicsFilter";
-import EthContext from "@/util/eth";
+import Eth from "@/util/eth";
 
 export default {
 //  inject : ['eth'],
@@ -106,10 +106,7 @@ export default {
   }),
   methods : {
       async newRegistry(event){
-          console.log(event)
-          await EthContext.newRegistry().then(tx=>{
-              console.log('newRegistry>',tx)
-          })
+          await Eth.newRegistry()
       }
   }
 };

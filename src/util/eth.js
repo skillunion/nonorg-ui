@@ -16,30 +16,40 @@ const Abi = {
 
 const Eth = {
 
-    provider : null,
-    registryFactory: null,
+    provider_ro : null,
+    provider_rw : null,
+    signer : null,
+    registryFactory_rw: null,
+    registryFactory_ro: null,
   
     init: function () {
       //ToDo: need to be rewritten for other providers and configurations
-      this.provider = new ethers.providers.InfuraProvider("rinkeby", networks.rinkeby.apiKey)
-      this.registryFactory = new ethers.Contract(networks.RegistryFactory.rinkeby.address, Abi.RegistryFactory, this.provider);
+      this.provider_ro = new ethers.providers.InfuraProvider("rinkeby", networks.rinkeby.apiKey)
+      //ToDo: check web3 undefined
+      if (typeof window.web3!=='undefined') {
+        this.provider_rw = new ethers.providers.Web3Provider(window.web3.currentProvider)
+        this.signer = this.provider_rw.getSigner()
+        this.registryFactory_rw = new ethers.Contract(networks.RegistryFactory.rinkeby.address, Abi.RegistryFactory, this.signer)
+      } 
+      this.registryFactory_ro = new ethers.Contract(networks.RegistryFactory.rinkeby.address, Abi.RegistryFactory, this.provider_ro)
       return this;
     },
 
     loadRegistries : async function () {
-      let provider = this.provider;
-      let registryFactory = this.registryFactory;
-      provider.resetEventsBlock()
+      let provider_ro = this.provider_ro
+      let registryFactory = this.registryFactory_ro
+      provider_ro.resetEventsBlock()
       registryFactory.on('NewRegistry', async (creator, token, plcr, parameterizer, registryAddress, event) => {
         console.log('ethers registry>',registryAddress, event);
-        let registry = new ethers.Contract(registryAddress, Abi.Registry, provider);
+        let registry = new ethers.Contract(registryAddress, Abi.Registry, provider_ro);
         console.log('registry.name>',await registry.name())
       })
     },
 
     newRegistry: async function () {
         const paramConfig = config.paramDefaults
-        var registryReceipt = await this.registryFactory.newRegistryWithToken(
+        var registryReceipt = await this.registryFactory_rw.newRegistryWithToken(
+            //ToDo: use other function to parse tokens in wei, taking precision in account other than 18 
             ethers.utils.parseEther(config.token.supply.toString()),
             config.token.name,
             config.token.decimals,
@@ -62,7 +72,7 @@ const Eth = {
             ],
             config.name,
           );
-        console.log(registryReceipt)  
+        console.log('registryReceipt>',registryReceipt)
     }
 }
 
