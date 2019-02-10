@@ -16,5 +16,5 @@ new Vue({
   router,
   store,
   apolloProvider: createProvider(),
-  mounted : EthContext.init()
+  mounted : EthContext.init().loadRegistries()
 })

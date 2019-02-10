@@ -1,0 +1,17 @@
+{
+    "rinkeby" : {
+        "apiKey" : "52bd875c563a4d6abff4d396bac8a8a5"
+    },    
+    "RegistryFactory": {
+        "rinkeby": {
+            "address": "0xbab4bd488a2c489b04bd867e26293ab88ab87392",
+            "transactionHash": "0x7be27254bd08fef67019a0838236a8b34350f4cf7dc4e3188e52fdbd50e5a616",
+            "block" : 3838900
+        },
+        "ganache": {
+            "address": "0x7681466283766b7511af0174f1860f92d733657e",
+            "transactionHash": "0x7fa150f67bce45c0571cc2db3444523bc929e631661723f492328601e4356585",
+            "block" : 0
+        }
+    }
+}

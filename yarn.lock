@@ -3879,7 +3879,7 @@ ethers@4.0.0-beta.1:
     uuid "2.0.1"
     xmlhttprequest "1.8.0"
 
-ethers@^4.0.0-beta.1:
+ethers@^4.0.0-beta.1, ethers@^4.0.24:
   version "4.0.24"
   resolved "https://registry.yarnpkg.com/ethers/-/ethers-4.0.24.tgz#f65fecd47b07a6ddd97a807acf3afb48857d2b79"
   integrity sha512-LwljiA2ozAM4aHyemJr3uMHeRdM2y34RtFpmMdunLkCqWriptIzSR8JI6S/oNe+Y/aISlPmihUCGaZygLLrYfA==

@@ -1,7 +1,7 @@
-{
+const Config = {
   "paramDefaults": {
-    "minDeposit": 10000000000000000000,
-    "pMinDeposit": 100000000000000000000,
+    "minDeposit": 10,
+    "pMinDeposit": 100,
     "applyStageLength": 600,
     "pApplyStageLength": 1200,
     "commitStageLength": 600,
@@ -17,7 +17,7 @@
 	},
   "name": "The TestChain Registry",
   "token": {
-    "supply": "1000000000000000000000000000",
+    "supply": 1000000000,
     "name": "TestCoin",
     "decimals": "18",
     "symbol": "TEST",
@@ -36,3 +36,4 @@
   }
 }
 
+export default Config
