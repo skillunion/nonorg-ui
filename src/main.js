@@ -5,7 +5,7 @@ import App from './App.vue'
 import router from './router/index'
 import store from './store/index'
 import { createProvider } from './vue-apollo'
-import EthContext from './util/eth'
+import Eth from './util/eth'
 
 
 Vue.config.productionTip = false
@@ -16,5 +16,7 @@ new Vue({
   router,
   store,
   apolloProvider: createProvider(),
-  mounted : EthContext.init().loadRegistries()
+  mounted : function() {
+    Eth.init().loadRegistries()
+  }
 })
