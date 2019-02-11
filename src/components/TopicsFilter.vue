@@ -2,8 +2,8 @@
   <v-combobox
     v-model="select"
     :items="items"
-    item-text="title"
-    item-value="id"
+    item-text="name"
+    item-value="address"
     label="Select topic"
     solo
     @input="onFilterChanged(select)"
@@ -28,15 +28,12 @@ export default {
   },
   computed: {
     items() {
-      return this.$store.getters.TOPICS;
+      return this.$store.getters.GET_REGISTRIES;
     }
   },
-  mounted() {
-    this.$store.dispatch("GET_TOPIC");
-  },
   methods: {
-    onFilterChanged() { //topics - input var
-      //this.$store.dispatch("SET_FILTER_CATEGORY_WORKS", topics.id)
+    onFilterChanged(topics) {
+      console.log('selected new topic', topics)
     }
   }
 };
