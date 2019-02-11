@@ -7,7 +7,6 @@ import store from './store/index'
 import { createProvider } from './vue-apollo'
 import Eth from './util/eth'
 
-
 Vue.config.productionTip = false
 
 new Vue({
@@ -16,7 +15,7 @@ new Vue({
   router,
   store,
   apolloProvider: createProvider(),
-  mounted : function() {
+  mounted: function () {
     Eth.init().loadRegistries()
   }
 })
