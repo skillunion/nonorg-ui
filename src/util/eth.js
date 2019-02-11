@@ -1,5 +1,6 @@
 import networks from '@/conf/networks.json'
 import config from '@/conf/config.js'
+import store from '@/store/index'; 
 const ethers = require('ethers')
 
 const Abi = {
@@ -42,7 +43,15 @@ const Eth = {
     registryFactory.on('NewRegistry', async (creator, token, plcr, parameterizer, registryAddress, event) => {
       console.log('ethers registry>', registryAddress, event);
       let registry = new ethers.Contract(registryAddress, Abi.Registry, provider_ro);
-      console.log('registry.name>', await registry.name())
+      let registryName = await registry.name()
+
+      console.log('ethers name>', registryAddress, registryName);
+
+      store.commit('SET_REGISTRY', {
+        transactionHash: event.transactionHash,
+        address: registryAddress,
+        name: registryName
+      })
     })
   },
 
@@ -73,6 +82,12 @@ const Eth = {
       config.name,
     );
     console.log('registryReceipt>', registryReceipt)
+
+    store.commit('ADD_REGISTRY', {
+      transactionHash: registryReceipt.hash,
+      address: null,
+      name: config.name
+    })
   }
 }
 

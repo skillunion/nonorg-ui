@@ -25,6 +25,11 @@ export default new Router({
       path: '/topics',
       name: 'topics',
       component: () => import("@/views/Topics")
+    },
+    {
+      path: '/registries',
+      name: 'registries',
+      component: () => import("@/views/Registries")
     }
   ]
 })
