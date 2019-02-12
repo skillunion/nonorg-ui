@@ -31,7 +31,9 @@ export default {
       ],
       pagination: {
         sync: {
-          rowsPerPage: -1
+          rowsPerPage: -1,
+          sortBy: 'status',
+          descending: false
         }
       }
     };
