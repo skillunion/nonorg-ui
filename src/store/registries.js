@@ -1,4 +1,5 @@
 import Eth from '@/util/eth'
+import Abi from '@/conf/abi'
 const ethers = require('ethers')
 
 // registries are stored as key-value object, to avoid to have 
@@ -29,6 +30,23 @@ const mutations = {
 }
 
 const actions = {
+  INIT_REGISTRY: async (context) => {
+    let provider_ro = Eth.provider_ro
+    let registryFactory = Eth.registryFactory_ro
+    provider_ro.resetEventsBlock()
+    registryFactory.on('NewRegistry', async (creator, token, plcr, parameterizer, registryAddress, event) => {
+
+      let registry = new ethers.Contract(registryAddress, Abi.Registry, provider_ro);
+      let registryName = await registry.name()
+
+      context.commit('SET_REGISTRY', {
+        transactionHash: event.transactionHash,
+        address: registryAddress,
+        name: registryName
+      })
+    })
+  },
+
   ADD_REGISTRY: async (context, data) => {
     var registryReceipt = await Eth.registryFactory_rw.newRegistryWithToken(
       //ToDo: use other function to parse tokens in wei, taking precision in account other than 18
@@ -54,8 +72,6 @@ const actions = {
       ],
       data.registry.name
     );
-
-    console.log('registryReceipt>', registryReceipt)
 
     context.commit('ADD_REGISTRY', {
       transactionHash: registryReceipt.hash,

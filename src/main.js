@@ -16,6 +16,7 @@ new Vue({
   store,
   apolloProvider: createProvider(),
   mounted: function () {
-    Eth.init().loadRegistries()
+    Eth.init()
+    this.$store.dispatch("INIT_REGISTRY")
   }
 })
