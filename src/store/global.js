@@ -8,7 +8,6 @@ const getters = {
 
 const mutations = {
   SET_CURRENT_TOPIC: (state, topic) => {
-      console.log('topic',topic)
     state.currentTopic = topic
   }
 }

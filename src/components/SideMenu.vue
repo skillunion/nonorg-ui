@@ -65,7 +65,6 @@
 
 <script>
 import TopicsFilter from "@/components/TopicsFilter"
-import Eth from "@/util/eth"
 
 export default {
   name: "SuSideMenu",
@@ -96,11 +95,6 @@ export default {
         ]
       }
     ]
-  }),
-  methods: {
-    async newRegistry(event) {
-      await Eth.newRegistry();
-    }
-  }
+  })
 };
 </script>

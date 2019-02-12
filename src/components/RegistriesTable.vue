@@ -5,6 +5,7 @@
       :headers="headers"
       :loading="loading"
       :items="items"
+      :pagination.sync="pagination.sync"
       class="elevation-1"
     >
       <template slot="items" slot-scope="props">
@@ -20,7 +21,12 @@
 export default {
   data() {
     return {
-      headers: [{ text: "address", value: "address" }, { text: "name", value: "name" }, { text: "status", value: "status"}]
+      headers: [{ text: "address", value: "address" }, { text: "name", value: "name" }, { text: "status", value: "status"}],
+      pagination: {
+        sync: {
+          rowsPerPage: -1
+        }
+      }
     };
   },
   computed: {
