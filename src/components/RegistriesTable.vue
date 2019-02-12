@@ -11,7 +11,10 @@
       <template slot="items" slot-scope="props">
         <td class="text-xs-left">{{ props.item.address }}</td>
         <td class="text-xs-left">{{ props.item.name }}</td>
-        <td class="text-xs-left">{{ props.item.status }}</td>
+        <td class="text-xs-left">
+          <v-chip v-if="props.item.status == 'published'" color="green" text-color="white">{{ props.item.status }}</v-chip>
+          <v-chip v-else color="orange" text-color="white">{{ props.item.status }}</v-chip>
+        </td>
       </template>
     </v-data-table>
   </div>
@@ -21,7 +24,11 @@
 export default {
   data() {
     return {
-      headers: [{ text: "address", value: "address" }, { text: "name", value: "name" }, { text: "status", value: "status"}],
+      headers: [
+        { text: "address", value: "address" },
+        { text: "name", value: "name" },
+        { text: "status", value: "status" }
+      ],
       pagination: {
         sync: {
           rowsPerPage: -1
@@ -31,10 +38,10 @@ export default {
   },
   computed: {
     items() {
-      return this.$store.getters.GET_REGISTRIES
+      return this.$store.getters.GET_REGISTRIES;
     },
     loading() {
-      return this.$store.getters.IS_REGISTRIES_LOADING
+      return this.$store.getters.IS_REGISTRIES_LOADING;
     }
   }
 };
