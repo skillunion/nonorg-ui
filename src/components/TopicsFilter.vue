@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     onFilterChanged(topics) {
-      console.log('selected new topic', topics)
+      this.$store.commit('SET_CURRENT_TOPIC', topics)
     }
   }
 };

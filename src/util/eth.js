@@ -56,31 +56,33 @@ const Eth = {
   },
 
   newRegistry: async function () {
-    const paramConfig = config.paramDefaults
-    var registryReceipt = await this.registryFactory_rw.newRegistryWithToken(
-      //ToDo: use other function to parse tokens in wei, taking precision in account other than 18 
-      ethers.utils.parseEther(config.token.supply.toString()),
-      config.token.name,
-      config.token.decimals,
-      config.token.symbol,
-      [
-        ethers.utils.parseEther(paramConfig.minDeposit.toString()),
-        ethers.utils.parseEther(paramConfig.pMinDeposit.toString()),
-        paramConfig.applyStageLength,
-        paramConfig.pApplyStageLength,
-        paramConfig.commitStageLength,
-        paramConfig.pCommitStageLength,
-        paramConfig.revealStageLength,
-        paramConfig.pRevealStageLength,
-        paramConfig.dispensationPct,
-        paramConfig.pDispensationPct,
-        paramConfig.voteQuorum,
-        paramConfig.pVoteQuorum,
-        paramConfig.exitTimeDelay,
-        paramConfig.exitPeriodLen,
-      ],
-      config.name,
-    );
+    //const paramConfig = config.paramDefaults
+    // var registryReceipt = await this.registryFactory_rw.newRegistryWithToken(
+    //   //ToDo: use other function to parse tokens in wei, taking precision in account other than 18 
+    //   ethers.utils.parseEther(config.token.supply.toString()),
+    //   config.token.name,
+    //   config.token.decimals,
+    //   config.token.symbol,
+    //   [
+    //     ethers.utils.parseEther(paramConfig.minDeposit.toString()),
+    //     ethers.utils.parseEther(paramConfig.pMinDeposit.toString()),
+    //     paramConfig.applyStageLength,
+    //     paramConfig.pApplyStageLength,
+    //     paramConfig.commitStageLength,
+    //     paramConfig.pCommitStageLength,
+    //     paramConfig.revealStageLength,
+    //     paramConfig.pRevealStageLength,
+    //     paramConfig.dispensationPct,
+    //     paramConfig.pDispensationPct,
+    //     paramConfig.voteQuorum,
+    //     paramConfig.pVoteQuorum,
+    //     paramConfig.exitTimeDelay,
+    //     paramConfig.exitPeriodLen,
+    //   ],
+    //   config.name,
+    // );
+
+    var registryReceipt = await this.registryFactory_rw.newRegistryWithToken(arguments);
     console.log('registryReceipt>', registryReceipt)
 
     store.commit('ADD_REGISTRY', {

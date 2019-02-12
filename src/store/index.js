@@ -1,8 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+
 import works from './works';
 import topics from './topics';
 import registries from './registries';
+import global from './global';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -13,6 +16,7 @@ export default new Vuex.Store({
   modules: {
     works,
     topics,
-    registries
+    registries,
+    global
   }
 });

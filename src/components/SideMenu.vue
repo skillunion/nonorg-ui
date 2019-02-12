@@ -51,31 +51,23 @@
         </v-list-tile>
       </template>
     </v-list>
-    
-    <v-btn
-      absolute
-      dark
-      fab
-      bottom
-      right
-      fixed
-      color="pink"
-      @click="newRegistry"
-      style="bottom:20px;"
-    >
-      <v-icon dark>add</v-icon>
-    </v-btn>
+
+    <v-layout row wrap align-center pl-3 pr-3 pt-3>
+      <v-flex class="text-xs-center">
+        <v-btn color="primary" block @click="$emit('add-work-button-click')">
+          <v-icon dark left>add</v-icon>
+          Add new work
+        </v-btn>
+      </v-flex>
+    </v-layout>
   </v-navigation-drawer>
-  
 </template>
 
 <script>
-import TopicsFilter from "@/components/TopicsFilter";
-import Eth from "@/util/eth";
+import TopicsFilter from "@/components/TopicsFilter"
+import Eth from "@/util/eth"
 
 export default {
-//  inject : ['eth'],
-
   name: "SuSideMenu",
   components: {
     TopicsFilter
@@ -105,10 +97,10 @@ export default {
       }
     ]
   }),
-  methods : {
-      async newRegistry(event){
-          await Eth.newRegistry()
-      }
+  methods: {
+    async newRegistry(event) {
+      await Eth.newRegistry();
+    }
   }
 };
 </script>
