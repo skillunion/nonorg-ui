@@ -242,7 +242,7 @@ const defaultFormValues = {
     name: null,
     address: null
   },
-  useNewRegistry: false,
+  useNewRegistry: true,
   advancedOptions: false,
   registry: {
     name: config.name,
@@ -294,14 +294,14 @@ export default {
     async onSaveButtonClick() {
       if (!this.$refs.form.validate()) return;
 
-      this.isLoading = true
+      this.isLoading = true;
 
       await this.$store.dispatch(
         "ADD_REGISTRY",
         JSON.parse(JSON.stringify(this.form))
       );
 
-      this.isLoading = false
+      this.isLoading = false;
 
       this.onCloseButtonClick();
     },
@@ -323,6 +323,10 @@ export default {
       } else {
         this.$refs.form.reset();
       }
+    },
+    $route: function() {
+      this.form.work.name = this.$route.query.title || "";
+      this.form.work.link = this.$route.query.link || "";
     }
   }
 };

@@ -54,7 +54,7 @@
 
     <v-layout row wrap align-center pl-3 pr-3 pt-3>
       <v-flex class="text-xs-center">
-        <v-btn color="primary" block @click="$emit('add-work-button-click')">
+        <v-btn color="primary" block @click="$router.push('/registries/create')">
           <v-icon dark left>add</v-icon>
           Add new work
         </v-btn>
