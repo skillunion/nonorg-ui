@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '@/store/index'
 
 Vue.use(Router)
 
@@ -29,7 +30,18 @@ export default new Router({
     {
       path: '/registries',
       name: 'registries',
-      component: () => import("@/views/Registries")
+      component: () => import("@/views/Registries"),
+      children: [
+        {
+          path: 'create',
+          name: 'createRegistry',
+          component: () => import("@/views/Registries"),
+          beforeEnter: (to, from, next) => {
+            store.commit('SET_CREATE_REGISTRY_VISIBILITY', true);
+            next();
+          }
+        }
+      ]
     }
   ]
 })

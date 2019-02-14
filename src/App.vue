@@ -1,17 +1,13 @@
 <template>
   <v-app id="app">
-    <SuSideMenu 
-      @add-work-button-click="dialog = true"
-      v-model="drawer"/>
+    <SuSideMenu v-model="drawer"/>
     <SuHeader @menu-click="drawer = !drawer"/>
     <v-content>
       <v-container fluid>
         <router-view></router-view>
       </v-container>
     </v-content>
-    <NewTopicDialog 
-      @close="$router.push('/registries'); dialog = false"
-      v-bind:value="dialog"/>
+    <NewTopicDialog @close="onNewTopicDialogClose" v-bind:value="createRegistryVisibility"/>
   </v-app>
 </template>
 
@@ -28,8 +24,18 @@ export default {
     NewTopicDialog
   },
   data: () => ({
-    drawer: true,
-    dialog: false
-  })
+    drawer: true
+  }),
+  methods: {
+    onNewTopicDialogClose() {
+      this.$store.commit('SET_CREATE_REGISTRY_VISIBILITY', false)
+      this.$router.push('/registries')
+    }
+  },
+  computed: {
+    createRegistryVisibility() {
+      return this.$store.getters.GET_CREATE_REGISTRY_VISIBILITY;
+    }
+  }
 };
 </script>
