@@ -1,4 +1,7 @@
 import Axios from 'axios'
+import Eth from '@/util/eth'
+import Abi from '@/conf/abi'
+const ethers = require('ethers')
 
 const state = {
   pagination: {
@@ -52,6 +55,22 @@ const actions = {
   SAVE_ITEM: async (context, payload) => {
     let { data } = await Axios.post('https://my-json-server.typicode.com/skillunion/nonorg-fake-api/works', payload);
     context.commit('ADD_ITEM', data);
+  },
+
+  ADD_WORK_INTO_REGISTRY: async (context, work) => {
+    var listingDataString = work.name + ';' + work.link,
+      listingData = ethers.utils.toUtf8Bytes(listingDataString),
+      listingHash = ethers.utils.sha256(listingData); // !!!!! Add userId, salt ???
+
+    var registry = new ethers.Contract(work.registryAddress, Abi.Registry, Eth.signer)
+
+    var registryReceipt = await registry.apply(
+      listingHash,
+      ethers.utils.parseEther(work.amount.toString()),
+      listingDataString
+    );
+
+    console.log('registryReceipt', registryReceipt);
   }
 }
 

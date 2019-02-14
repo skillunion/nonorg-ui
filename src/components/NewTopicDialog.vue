@@ -234,6 +234,9 @@
 import config from "@/conf/config.js";
 
 const defaultFormValues = {
+  listing: {
+    amount: config.paramDefaults.minDeposit
+  },
   work: {
     name: null,
     link: null
@@ -292,18 +295,31 @@ export default {
   props: ["value"],
   methods: {
     async onSaveButtonClick() {
-      if (!this.$refs.form.validate()) return;
+      var me = this;
+      if (!me.$refs.form.validate()) return;
 
-      this.isLoading = true;
+      me.isLoading = true;
 
-      await this.$store.dispatch(
-        "ADD_REGISTRY",
-        JSON.parse(JSON.stringify(this.form))
-      );
+      if (me.form.useNewRegistry) {
+        await me.$store.dispatch(
+          "ADD_REGISTRY_THEN_APPLY",
+          JSON.parse(JSON.stringify(me.form))
+        );
+      } else {
+        await me.$store.dispatch(
+          "ADD_WORK_INTO_REGISTRY",
+          {
+            name: me.form.work.name,
+            link: me.form.work.link,
+            registryAddress: me.form.currentRegistry.address,
+            amount: me.form.listing.amount
+          }
+        );
+      }
 
-      this.isLoading = false;
+      me.isLoading = false;
 
-      this.onCloseButtonClick();
+      me.onCloseButtonClick();
     },
     onCloseButtonClick() {
       this.$emit("close");

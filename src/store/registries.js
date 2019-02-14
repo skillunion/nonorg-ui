@@ -81,6 +81,10 @@ const actions = {
   },
 
   ADD_REGISTRY_THEN_APPLY: async (context, data) => {
+    var listingDataString = data.work.name + ';' + data.work.link,
+        listingData = ethers.utils.toUtf8Bytes(listingDataString),
+        listingHash = ethers.utils.sha256(listingData); // !!!!! Add userId, salt ???
+
     var registryReceipt = await Eth.registryFactory_rw.newRegistryWithToken_ThenApply(
       //ToDo: use other function to parse tokens in wei, taking precision in account other than 18
       ethers.utils.parseEther(data.registry.token.supply.toString()),
@@ -88,9 +92,9 @@ const actions = {
       data.registry.token.decimals,
       data.registry.token.symbol,
       // ============ Apply Listing =========
-      data.listing.hash, 
-      data.listing.amount, 
-      ethers.utils.toUtf8Bytes(data.listing.data)   // use ethers.utils.toUtf8String for decode
+      listingHash, //data.listing.hash, 
+      ethers.utils.parseEther(data.listing.amount.toString()), 
+      listingDataString, //ethers.utils.toUtf8Bytes(data.listing.data)   // use ethers.utils.toUtf8String for decode
       [
         ethers.utils.parseEther(data.registry.parameters.minDeposit.toString()),
         ethers.utils.parseEther(data.registry.parameters.pMinDeposit.toString()),
@@ -116,11 +120,11 @@ const actions = {
       name: data.registry.name
     })
 
-    context.commit('ADD_WORK', {
-      transactionHash: registryReceipt.hash,
-      address: null,
-      name: data.registry.name
-    })
+    // context.commit('ADD_WORK', {
+    //   transactionHash: registryReceipt.hash,
+    //   address: null,
+    //   name: data.registry.name
+    // })
   }
 
 }
