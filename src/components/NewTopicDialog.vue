@@ -6,7 +6,9 @@
         <v-card-title>
           <span class="headline">Add New Work</span>
         </v-card-title>
+
         <v-divider></v-divider>
+
         <v-card-text style="height: 600px;">
           <v-form ref="form" lazy-validation>
             <!-- <v-container grid-list-md pa-0> -->
@@ -213,6 +215,7 @@
           </v-form>
         </v-card-text>
         <v-divider></v-divider>
+
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="onCloseButtonClick">Close</v-btn>
@@ -300,26 +303,30 @@ export default {
 
       me.isLoading = true;
 
-      if (me.form.useNewRegistry) {
-        await me.$store.dispatch(
-          "ADD_REGISTRY_THEN_APPLY",
-          JSON.parse(JSON.stringify(me.form))
-        );
-      } else {
-        await me.$store.dispatch(
-          "ADD_WORK_INTO_REGISTRY",
-          {
-            name: me.form.work.name,
-            link: me.form.work.link,
-            registryAddress: me.form.currentRegistry.address,
-            amount: me.form.listing.amount
-          }
-        );
+      try {
+        if (me.form.useNewRegistry) {
+          await me.$store.dispatch(
+            "ADD_REGISTRY_THEN_APPLY",
+            JSON.parse(JSON.stringify(me.form))
+          );
+        } else {
+          await me.$store.dispatch(
+            "ADD_WORK_INTO_REGISTRY",
+            {
+              name: me.form.work.name,
+              link: me.form.work.link,
+              registryAddress: me.form.currentRegistry.address,
+              amount: me.form.listing.amount
+            }
+          );
+        }
+
+        me.isLoading = false;
+        me.onCloseButtonClick();
+      } catch(e) {
+        me.isLoading = false;
+        alert('Error ' + e.name + ":" + e.message + "\n" + e.stack);
       }
-
-      me.isLoading = false;
-
-      me.onCloseButtonClick();
     },
     onCloseButtonClick() {
       this.$emit("close");
